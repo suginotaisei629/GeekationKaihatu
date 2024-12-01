@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport メタタグ -->
+    <title>店舗詳細</title>
+	<link rel="stylesheet" href="/css/logout-container.css">
+</head>
+<body>
+    <h1>店舗詳細</h1>
+	<a href="/top" class="button-back">トップに戻る</a>
+    <form th:action="@{/stores-id/{id}(id=${store.id})}"  method="post">
+		<table border="1">
+			<tr>
+				<td>ID</td>
+				<td>
+					<span th:text="${store.id}">店舗ID</span> <!-- ユーザーIDを表示 -->
+				</td>
+			</tr>
+			<tr>
+			    <td>店舗名</td>
+			    <td><input type="text"  th:value="${store.fname}" required /></td>
+			</tr>
+			<tr>
+			    <td>住所</td>
+			    <td><input type="text"  th:value="${store.address}" required /></td>
+			</tr>
+        </table>
+    </form>
+	<form th:action="@{/store-id/{id}/edit(id=${store.id})}" method="get">
+		<button type="submit">編集</button>
+	</form>
+	<div class="logout-container">
+		<form th:action="@{/logout}" method="post">
+			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+			<input type="submit" value="ログアウト">
+		</form>
+	</div>
+</body>
+</html>
