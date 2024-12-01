@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport メタタグ -->
+    <title>管理者ログイン</title>
+</head>
+<body>
+    <h1>管理者ログイン</h1>
+    <form th:action="@{/login}"  method="post">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+		<table border="1">
+			<tr>
+				<td>メールアドレス</td>
+                <td>
+					<input type="email" name="username" required />
+                </td>
+            </tr>
+            <tr>
+                <td>パスワード</td>
+                <td>
+                    <input type="password" name="password" required />
+                </td>
+            </tr>
+        </table>
+		<button type="submit">ログイン</button>
+    </form>
+    <div th:if="${param.error}">
+		<p style="color:red;">ログインに失敗しました。再度お試しください。</p>
+    </div>
+</body>
+</html>

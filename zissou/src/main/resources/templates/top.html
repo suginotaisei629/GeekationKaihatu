@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理者TOP</title>
+	<link rel="stylesheet" href="/css/logout-container.css">
+</head>
+<body>
+    <h1>管理者TOP</h1>
+    <form th:action="@{/top}"  method="post">
+		<table border="1">
+			<nav>
+				<li><a href="/new">管理者登録</a></li>
+			</nav>
+			<nav>
+				<li><a href="/profile">管理者プロフィール</a></li>
+			</nav>
+			<nav>
+				<li><a href="/stores">店舗検索</a></li>
+			</nav>
+			<nav>
+				<li><a href="/admin">管理者一覧</a></li>
+			</nav>
+			<nav>
+				<li><a href="/ProductCategoryView">商品一覧</a></li>
+			</nav>
+			<nav>
+				<li><a href="/purchase_history">商品発注履歴一覧</a></li>
+			</nav>
+			<nav>
+				<li><a href="/manufacturers">メーカー一覧</a></li>
+			</nav>
+			<nav>
+				<li><a href="/ProductCategories">大カテゴリー一覧</a></li>
+			</nav>
+        </table>
+    </form>
+	<div class="logout-container">
+		<form th:action="@{/logout}" method="post">
+			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+			<input type="submit" value="ログアウト">
+		</form>
+	</div>
+</body>
+</html>
