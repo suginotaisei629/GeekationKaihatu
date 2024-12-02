@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>大カテゴリ一覧</title>
+	<link rel="stylesheet" href="/css/logout-container.css">
+</head>
+<body>
+    <h1>大カテゴリ一覧</h1>
+    <ul>
+		<li th:each="category : ${largeCategories}">
+			<a th:href="@{/ProductCategories/{id}(id=${category.id})}" th:text="${category.name}">カテゴリ名</a>
+		</li>
+    </ul>
+	
+	<a href="/top" class="button-back">トップに戻る</a>
+		<div class="logout-container">
+			<form th:action="@{/logout}" method="post">
+				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+				<input type="submit" value="ログアウト">
+			</form>
+		</div>
+</body>
+</html>

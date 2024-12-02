@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>メーカー作成</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>メーカー作成</h1>
+
+    <!-- メーカー名の入力フォーム -->
+    <form th:action="@{/manufacturers/create}" method="post">
+        <label for="name">メーカー名:</label>
+        <input type="text" id="name" name="name" required="required" placeholder="メーカー名を入力">
+
+        <button type="submit">作成</button>
+    </form>
+    <a href="/manufacturers" class="button-back">メーカー一覧に戻る</a>
+</body>
+</html>
