@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>小カテゴリ詳細</title>
+    <link rel="stylesheet" href="/css/logout-container.css">
+</head>
+<body>
+    <!-- 小カテゴリ名の表示 -->
+    <h1 th:text="${smallCategory.name}">小カテゴリ名</h1>
+	
+    <!-- トップページに戻るリンク -->
+    <a href="/top" class="button-back">トップに戻る</a>
+
+    <!-- ログアウトフォーム -->
+    <div class="logout-container">
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+            <input type="submit" value="ログアウト">
+        </form>
+    </div>
+</body>
+</html>

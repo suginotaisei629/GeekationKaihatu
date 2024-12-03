@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者詳細</title>
+	<link rel="stylesheet" href="/css/logout-container.css">
+</head>
+<body>
+    <h1>管理者詳細</h1>
+    <a href="/admin" class="button-back">管理者一覧に戻る</a>
+
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>管理者ID</th>  <!-- IDを表示するカラムを追加 -->
+                    <th>姓</th>
+                    <th>名</th>
+                    <th>メールアドレス</th>
+                    <th>権限</th>
+					<th>店舗ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- 管理者IDを表示 -->
+                    <td th:text="${user.id}"></td>  
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.permissions}"></td>
+					<td th:text="${user.storeId}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 管理者権限がある場合のみ削除ボタンを表示 -->
+    <div th:if="${hasAdminRole}">
+        <form th:action="@{/admin/delete/{id}(id=${user.id})}" method="post">
+            <input type="submit" value="削除" onclick="return confirm('本当に削除しますか？');" />
+        </form>
+    </div>
+
+    <div class="logout-container">
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+            <input type="submit" value="ログアウト">
+        </form>
+    </div>
+</body>
+</html>

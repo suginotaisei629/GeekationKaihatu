@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport メタタグ -->
+    <title>管理者新規登録</title>
+	<link rel="stylesheet" href="/css/logout-container.css">
+</head>
+<body>
+    <h1>管理者新規登録</h1>
+	<a href="/top" class="button-back">トップに戻る</a>
+	<a href="/admin" class="button-back">管理者一覧に戻る</a>
+    <form th:action="@{/new}"  method="post">
+		<table border="1">
+			<tr>
+			    <td>姓</td>
+			    <td><input type="text" name="lastName" required /></td>
+			</tr>
+			<tr>
+			    <td>名</td>
+			    <td><input type="text" name="firstName" required /></td>
+			</tr>
+			<tr>
+				<td>メールアドレス</td>
+                <td>
+					<input type="email" id="email" name="email" required />
+                </td>
+            </tr>
+            <tr>
+                <td>パスワード</td>
+                <td>
+                    <input type="password" name="password" required />
+                </td>
+            </tr>
+			<tr>
+				<td>役職</td>
+				<td>
+					<select name="role">
+					    <option th:value="manager">店長</option>
+					    <option th:value="subManager">副店長</option>
+					    <option th:value="supervisor">マネージャー</option>
+					    <option th:value="employee">一般従業員</option>
+					    <option th:value="partTime">パート・アルバイト</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>権限</td>
+				<td>
+					<select name="permissions">
+					    <option th:value="admin">管理者</option>
+					    <option th:value="user">一般</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>店舗ID</td>
+				<td>
+					<input type="number" id="storeId" name="storeId">
+			     </td>
+			 </tr>
+        </table>
+		<input type="submit" value="登録">
+    </form>
+	<div class="logout-container">
+		<form th:action="@{/logout}" method="post">
+			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+			<input type="submit" value="ログアウト">
+		</form>
+	</div>
+</body>
+</html>

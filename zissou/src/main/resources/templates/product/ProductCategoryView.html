@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品一覧</title>
+    <link rel="stylesheet" href="/css/logout-container.css">
+</head>
+<body>
+    <h1>商品一覧</h1>
+	<a href="/top" class="button-back">トップに戻る</a>
+
+    <!-- 検索フォーム -->
+    <form th:action="@{/ProductCategoryView}" method="get">
+        <label for="productName">商品名:</label>
+        <input type="text" id="productName" name="productName" th:value="${param.productName}">
+
+        <label for="largeCategory">大カテゴリ:</label>
+        <select id="largeCategory" name="largeCategory">
+            <option value="" th:selected="${param.largeCategory == ''}">全て</option>
+            <option th:each="largeCategory : ${largeCategories}" 
+                    th:value="${largeCategory}" 
+                    th:text="${largeCategory}" 
+                    th:selected="${largeCategory == param.largeCategory}"></option>
+        </select>
+
+        <label for="mediumCategory">中カテゴリ:</label>
+        <select id="mediumCategory" name="mediumCategory">
+            <option value="" th:selected="${param.mediumCategory == ''}">全て</option>
+            <option th:each="mediumCategory : ${mediumCategories}" 
+                    th:value="${mediumCategory}" 
+                    th:text="${mediumCategory}" 
+                    th:selected="${mediumCategory == param.mediumCategory}"></option>
+        </select>
+
+        <label for="smallCategory">小カテゴリ:</label>
+        <select id="smallCategory" name="smallCategory">
+            <option value="" th:selected="${param.smallCategory == ''}">全て</option>
+            <option th:each="smallCategory : ${smallCategories}" 
+                    th:value="${smallCategory}" 
+                    th:text="${smallCategory}" 
+                    th:selected="${smallCategory == param.smallCategory}"></option>
+        </select>
+
+        <button type="submit">検索</button>
+    </form>
+
+	<table>
+		<thead>
+			<tr>
+				<th>商品名</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${productList}">
+				<td>
+					<a th:href="@{/product/{productId}(productId=${product.productId})}"th:text="${product.productName}">商品名</a>
+				</td> <!-- 商品名をクリック -->
+			</tr>
+		</tbody>
+	</table>
+	
+	<ul class="pagination" style="display: flex; list-style: none; padding-left: 0;">
+	    <!-- 最初のページ -->
+	    <li class="page-item ${currentPage == 1 ? 'disabled' : ''}" style="display: inline-block; margin-right: 10px;">
+	        <a class="page-link" href="/ProductCategoryView">1</a>
+	    </li>
+
+	    <!-- 次のページ -->
+	    <li class="page-item ${currentPage + 1 > totalPages ? 'disabled' : ''}" style="display: inline-block; margin-right: 10px;">
+	        <a class="page-link" href="?page=${currentPage + 1}&size=${size}">次</a>
+	    </li>
+	</ul>
+
+	<div class="logout-container">
+		<form th:action="@{/logout}" method="post">
+			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+			<input type="submit" value="ログアウト">
+		</form>
+	</div>
+</body>
+</html>

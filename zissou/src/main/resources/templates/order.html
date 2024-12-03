@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品発注</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>商品発注</h1>
+    <h2 th:text="${product.productName}">商品名</h2>
+    <p>商品ID: <span th:text="${product.productId}">ID</span></p>
+    <p>価格: <span th:text="${product.retailPrice}">販売価格</span>円</p>
+	
+	<form action="/submitOrder" method="POST">
+		<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+		<input type="hidden" name="productId" th:value="${product.productId}" />
+		<label for="store">店舗を選択:</label>
+		    <select id="store" name="storeId">
+		        <th:block th:each="store : ${stores}">
+		            <option th:value="${store.id}" th:text="${store.fname}">店舗名</option>
+		        </th:block>
+		    </select>
+		
+		<label for="email">メールアドレス:</label>
+		<input type="email" id="email" name="email" required />
+		
+        <label for="quantity">発注数:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+		
+        <button type="submit">発注する</button>
+    </form>
+
+    <a href="/ProductCategoryView">商品一覧に戻る</a>
+    <a href="/top" class="button-back">トップに戻る</a>
+</body>
+</html>

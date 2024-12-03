@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品発注履歴</title>
+</head>
+<body>
+    <h1>商品発注履歴</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>商品ID</th>
+                <th>店舗ID</th>
+				<th>ユーザー名</th>
+                <th>発注数</th>
+				<th>合計金額</th>
+                <th>発注日時</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="history : ${purchaseHistories}">
+                <td th:text="${history.productId}">商品ID</td>
+                <td th:text="${history.storeId}">店舗ID</td>
+				<td th:text="${userName}">ユーザー名</td> 
+                <td th:text="${history.quantity}">発注数</td>
+				<td th:text="${history.totalAmount}">合計金額</td>
+				<td th:text="${history.orderDate}">発注日時</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/top">トップに戻る</a>
+</body>
+</html>
